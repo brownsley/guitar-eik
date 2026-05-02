@@ -1,43 +1,30 @@
-Guitar Eik
-I love playing guitar, but I couldn't find a chord app I liked. The other apps had too many ads and didn't have the songs I wanted to play. So, I decided to build my own using Spring Boot!
+# 🎸 Guitar Eik
 
-Why I made this
-No Ads: I wanted a clean space to play music without interruptions.
+A clean, ad-free space for guitarists to practice and perform.
 
-My Favorite Songs: I can add and save all the songs I love.
+---
 
-Simple: Just the chords and lyrics. No extra mess.
+## 💡 Why I built this
+I struggled to find a reliable guitar chord app without intrusive ads. So, I decided to build my own using **Spring Boot**.
 
-Tech Stack
-Backend: Spring Boot (Java)
+## ✨ Key Features
+* **Ad-Free:** Zero distractions.
+* **Custom Library:** Add and save your favorite songs.
+* **Simple:** Focus on chords and lyrics only.
 
-Build Tool: Maven
+## 🛠 Tech Stack
+* **Backend:** Spring Boot (Java)
+* **Build Tool:** Maven
+* **CI/CD:** GitHub Actions
+* **Deployment:** VPS
 
-CI/CD: GitHub Actions
+## 🚀 Automation & Deployment
+This project uses **GitHub Actions** for automated builds and testing. Every push to `main` deploys directly to my **VPS**, ensuring the live version is always up to date.
 
-Deployment: VPS (Virtual Private Server)
+## 💻 Getting Started
+Clone and run locally:
 
-🚀 Deployment & Automation
-This project uses GitHub Actions for CI/CD. Every time I push code to the main branch, the project automatically builds, tests, and deploys to my VPS, ensuring the live version is always up to date.
-
-How to run locally
-If you want to run this on your own computer:
-
-Clone the project:
-
-Bash
-git clone https://github.com/brownsley/guitar-eik.git
-Move to the project folder:
-
-Bash
+```bash
+git clone [https://github.com/brownsley/guitar-eik.git](https://github.com/brownsley/guitar-eik.git)
 cd guitar-eik
-Start the app:
-
-Bash
 ./mvnw spring-boot:run
-Built by Brownsley for my own guitar sessions.
-
-Why this is great:
-CI/CD: Mentioning GitHub Actions tells anyone reading that you know how to automate your workflow.
-
-Deployment: Mentioning the VPS shows you know how to take an app from "my computer" to "the real internet."
