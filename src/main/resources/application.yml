@@ -1,0 +1,19 @@
+spring:
+    output:
+        ansi:
+            enabled: always
+    datasource:
+        url: jdbc:mysql://gateway01.ap-southeast-1.prod.aws.tidbcloud.com:4000/guitar_eik?sslMode=VERIFY_IDENTITY
+        username: 3dxcbofxwG5opNq.root
+        password: aJalANIisq9uZ1jw
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        hikari:
+            connection-timeout: 30000
+            maximum-pool-size: 5
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+
+server:
+    port: 9090

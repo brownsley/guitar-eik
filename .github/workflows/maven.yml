@@ -1,0 +1,50 @@
+name: Java with Maven
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+  security-events: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: maven
+
+      - name: Build and Test with Maven Fix
+        run: mvn -B package --file pom.xml
+        
+      - name: Upload JAR to VPS via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 150.95.27.137
+          username: root
+          password: "1Ear2eye@"
+          source: "target/server-4.0.5.jar"
+          target: "/root/guitar-eik/deploy"
+          strip_components: 1
+
+      - name: Restart Spring Boot App on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 150.95.27.137
+          username: root
+          password: "1Ear2eye@"
+          script: |
+            mkdir -p /root/guitar-eik/deploy
+            cd /root/guitar-eik/deploy
+            fuser -k 9090/tcp || true
+            nohup java -jar server-4.0.5.jar > app.log 2>&1 &

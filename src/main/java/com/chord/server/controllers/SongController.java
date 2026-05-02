@@ -1,0 +1,42 @@
+package com.chord.server.controllers;
+
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.chord.server.dto.request.SongCreateDto;
+import com.chord.server.entities.Song;
+import com.chord.server.projections.SongSummary;
+import com.chord.server.services.SongService;
+
+@RestController
+@RequestMapping("/songs")
+public class SongController {
+    private final SongService songService;
+
+    public SongController(SongService songService) {
+        this.songService = songService;
+    }
+
+    @PostMapping
+    public void spngCreate(@RequestBody SongCreateDto createDto) {
+        songService.songCreate(createDto);
+    }
+
+    @GetMapping("/{id}")
+    public Song getSongDetail(@PathVariable Long id) {
+        return songService.getSongDetail(id);
+    }
+
+    @GetMapping
+    public Page<SongSummary> getAllSongsSummary(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int count) {
+        return songService.getAllSongsSummary(page, count);
+    }
+
+}
