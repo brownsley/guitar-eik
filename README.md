@@ -1,37 +1,43 @@
-<h1 align="center">Project Name: Guitar Eik</h1>
+Guitar Eik
+I love playing guitar, but I couldn't find a chord app I liked. The other apps had too many ads and didn't have the songs I wanted to play. So, I decided to build my own using Spring Boot!
 
-###
+Why I made this
+No Ads: I wanted a clean space to play music without interruptions.
 
-<p align="left">I'm Brownsley</p>
+My Favorite Songs: I can add and save all the songs I love.
 
-###
+Simple: Just the chords and lyrics. No extra mess.
 
-<h2 align="left">About this project</h2>
+Tech Stack
+Backend: Spring Boot (Java)
 
-###
+Build Tool: Maven
 
-<p align="left">I love playing guitar, but I couldn't find an app I liked. The other apps had too many ads and didn't have the songs I wanted to play. So, I decided to build my own!</p>
+CI/CD: GitHub Actions
 
-###
+Deployment: VPS (Virtual Private Server)
 
-<h3 align="left">Why I made this</h3>
+🚀 Deployment & Automation
+This project uses GitHub Actions for CI/CD. Every time I push code to the main branch, the project automatically builds, tests, and deploys to my VPS, ensuring the live version is always up to date.
 
-###
+How to run locally
+If you want to run this on your own computer:
 
-<h6 align="left">No Ads: I wanted a clean space to play music.<br><br>My Favorite Songs: I can add all the songs I love.<br><br>Simple: Just the chords and lyrics. No extra mess.</h6>
+Clone the project:
 
-###
+Bash
+git clone https://github.com/brownsley/guitar-eik.git
+Move to the project folder:
 
-<h3 align="left">Tech Stack</h3>
+Bash
+cd guitar-eik
+Start the app:
 
-###
+Bash
+./mvnw spring-boot:run
+Built by Brownsley for my own guitar sessions.
 
-<div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" height="40" alt="java logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" height="40" alt="spring logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" height="40" alt="mysql logo"  />
-</div>
+Why this is great:
+CI/CD: Mentioning GitHub Actions tells anyone reading that you know how to automate your workflow.
 
-###
+Deployment: Mentioning the VPS shows you know how to take an app from "my computer" to "the real internet."
