@@ -20,7 +20,7 @@ jobs:
           distribution: "temurin"
           cache: maven
       - name: Build and Test with Maven Fix
-        run: mvn -B package --file pom.xml
+        run: mvn clean package --file pom.xml
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
@@ -28,5 +28,5 @@ jobs:
           name: guitar-eik-app
           path: target/*.jar
 
-      - name: List files for debug
-        run: ls -R
+      - name: Check target folder content
+        run: ls -la target/
