@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6.0.2
+        uses: actions/checkout@v4
 
       - name: Set uo JDK 21
         uses: actions/setup-java@v5.2.0
@@ -23,7 +23,7 @@ jobs:
         run: mvn -B package --file pom.xml
 
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@4
+        uses: actions/upload-artifact@v4
         with:
           name: guitar-eik-app
           path: target/*.jar

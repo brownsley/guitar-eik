@@ -22,7 +22,7 @@ jobs:
         with:
           name: guitar-eik-app
           path: target/*.jar
-      
+
       - name: Upload JAR to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
