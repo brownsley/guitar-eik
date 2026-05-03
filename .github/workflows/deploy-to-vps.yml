@@ -23,6 +23,15 @@ jobs:
           name: guitar-eik-app
           path: .
 
+      - name: List files for debug
+        run: ls -R
+
+      - name: Move JAR to Root
+        run: mv target/server-4.0.5.jar .
+
+      - name: List files for debug
+        run: ls -R
+
       - name: Upload JAR to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
