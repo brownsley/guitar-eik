@@ -21,3 +21,9 @@ jobs:
           cache: maven
       - name: Build and Test with Maven Fix
         run: mvn -B package --file pom.xml
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@4
+        with:
+          name: guitar-eik-app
+          path: target/*.jar
