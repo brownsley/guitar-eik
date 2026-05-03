@@ -16,5 +16,9 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
 
     Page<ArtistSummary> findBy(Pageable pageable);
 
+    boolean existsByName(String name);
+
     ArtistDetailSummary findProjectedById(Long id);
+
+    List<ArtistSummary> findByNameContainingIgnoreCase(String name);
 }

@@ -34,6 +34,11 @@ public class ArtistController {
         artistService.artistCreate(createDto);
     }
 
+    @GetMapping("/search")
+    public List<ArtistSummary> search(@RequestParam(name = "query", required = false) String query) {
+        return artistService.searchArtist(query);
+    }
+
     @GetMapping("/{id}")
     public ArtistDetailSummary getArtistDetail(@PathVariable Long id) {
         return artistService.getArtistDetail(id);

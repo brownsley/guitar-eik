@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.chord.server.dto.request.SongCreateDto;
 import com.chord.server.entities.Artist;
 import com.chord.server.entities.Song;
+import com.chord.server.exception.ResourceAlreadyExistsException;
 import com.chord.server.exception.ResourceNotFoundException;
 import com.chord.server.projections.SongSummary;
 import com.chord.server.repositories.ArtistRepository;
@@ -27,8 +28,15 @@ public class SongService {
         this.artistRepository = artistRepository;
     }
 
+    public List<SongSummary> searchSongs(String query) {
+        return songRepository.findByTitleContainingIgnoreCase(query);
+    }
+
     public void songCreate(SongCreateDto createDto) {
         Song song = new Song();
+        if (songRepository.existsByTitle(createDto.getTitle())) {
+            throw new ResourceAlreadyExistsException(createDto.getTitle() + "already exists");
+        }
         song.setTitle(createDto.getTitle());
         song.setLyric(createDto.getLyric());
         List<Artist> artists = artistRepository.findAllById(createDto.getArtists());

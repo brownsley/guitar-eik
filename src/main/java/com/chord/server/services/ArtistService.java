@@ -1,5 +1,7 @@
 package com.chord.server.services;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.chord.server.dto.request.ArtistCreateDto;
 import com.chord.server.entities.Artist;
+import com.chord.server.exception.ResourceAlreadyExistsException;
 import com.chord.server.projections.ArtistDetailSummary;
 import com.chord.server.projections.ArtistSummary;
 import com.chord.server.repositories.ArtistRepository;
@@ -20,8 +23,15 @@ public class ArtistService {
         this.artistRepository = artistRepository;
     }
 
+    public List<ArtistSummary> searchArtist(String query) {
+        return artistRepository.findByNameContainingIgnoreCase(query);
+    }
+
     public void artistCreate(ArtistCreateDto createDto) {
         Artist artist = new Artist();
+        if (artistRepository.existsByName(createDto.getName())) {
+            throw new ResourceAlreadyExistsException(createDto.getName() + " already exists");
+        }
         artist.setAvatar(createDto.getAvater());
         artist.setName(createDto.getName());
         artist.setSocialLink(createDto.getSocialLink());

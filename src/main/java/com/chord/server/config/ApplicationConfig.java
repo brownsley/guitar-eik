@@ -34,8 +34,8 @@ public class ApplicationConfig {
                 .formLogin(login -> login.disable())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/songs/**", "/health").permitAll()
-                        .requestMatchers("/RPA/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/artist/**").permitAll()
+                        .requestMatchers("/RPA/**").permitAll()
                         .requestMatchers("/songs").authenticated().anyRequest().authenticated())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

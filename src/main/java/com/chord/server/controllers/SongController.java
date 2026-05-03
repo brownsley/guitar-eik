@@ -1,5 +1,7 @@
 package com.chord.server.controllers;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,11 @@ public class SongController {
     @PostMapping
     public void spngCreate(@RequestBody SongCreateDto createDto) {
         songService.songCreate(createDto);
+    }
+
+    @GetMapping("/search")
+    public List<SongSummary> seatch(@RequestParam(name = "query", required = false) String query) {
+        return songService.searchSongs(query);
     }
 
     @GetMapping("/{id}")

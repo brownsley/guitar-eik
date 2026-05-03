@@ -1,16 +1,11 @@
-# 🎸 Guitar Eik
+# Project Name : Guitar Eik
 
-A clean, ad-free space for guitarists to practice and perform.
 
----
+## Why I Built This
 
-## 💡 Why I built this
-I struggled to find a reliable guitar chord app without intrusive ads. So, I decided to build my own using **Spring Boot**.
+I love playing the guitar, but I had a hard time using other apps. Many apps had too many ads, or they did not have the songs I wanted to play.
 
-## ✨ Key Features
-* **Ad-Free:** Zero distractions.
-* **Custom Library:** Add and save your favorite songs.
-* **Simple:** Focus on chords and lyrics only.
+I decided to create my own app to solve this. Now, I have a simple place where I can save all my favorite songs and practice whenever I want. This app helps me focus on playing music instead of searching for chords.
 
 ## 🛠 Tech Stack
 * **Backend:** Spring Boot (Java)
@@ -18,10 +13,10 @@ I struggled to find a reliable guitar chord app without intrusive ads. So, I dec
 * **CI/CD:** GitHub Actions
 * **Deployment:** VPS
 
-## 🚀 Automation & Deployment
+## Automation & Deployment
 This project uses **GitHub Actions** for automated builds and testing. Every push to `main` deploys directly to my **VPS**, ensuring the live version is always up to date.
 
-## 💻 Getting Started
+## Getting Started
 Clone and run locally:
 
 ```bash
