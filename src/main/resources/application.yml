@@ -1,11 +1,15 @@
 spring:
+    autoconfigure:
+        exclude:
+            - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+            - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
     output:
         ansi:
             enabled: always
     datasource:
-        url: ${DB_URL}
-        username: ${DB_USER}
-        password: ${DB_PASSWORD}
+        url: ${DB_URL:jdbc:mysql://localhost:3306/default_db}
+        username: ${DB_USER:root}
+        password: ${DB_PASSWORD:password}
         driver-class-name: com.mysql.cj.jdbc.Driver
         hikari:
             connection-timeout: 30000
