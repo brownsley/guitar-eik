@@ -1,0 +1,25 @@
+name: Testing Develop Branch
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6.0.2
+
+      - name: Set uo JDK 21
+        uses: actions/setup-java@v5.2.0
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: maven
+      - name: Build and Test with Maven Fix
+        run: mvn -B package --file pom.xml
+
+      - name: Success
+        run: echo "Success"
