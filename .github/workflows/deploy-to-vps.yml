@@ -23,6 +23,9 @@ jobs:
           name: guitar-eik-app
           path: .
 
+      - name: List all files to find the JAR
+        run: ls -R
+
       - name: List files for debug
         run: ls -la target/
 
