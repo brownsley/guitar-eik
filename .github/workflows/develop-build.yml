@@ -2,6 +2,7 @@ name: Testing Develop Branch
 
 on:
   workflow_dispatch:
+  workflow_call:
   push:
     branches: [ "develop" ]
 
@@ -20,6 +21,3 @@ jobs:
           cache: maven
       - name: Build and Test with Maven Fix
         run: mvn -B package --file pom.xml
-
-      - name: Success
-        run: echo "Success"
