@@ -46,4 +46,9 @@ jobs:
             mkdir -p /root/guitar-eik/deploy
             cd /root/guitar-eik/deploy
             fuser -k 9090/tcp || true
+
+            export DB_URL="${{ secrets.DB_URL }}"
+            export DB_USER="${{ secrets.DB_USER }}"
+            export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
+
             nohup java -jar server-4.0.5.jar > app.log 2>&1 &
