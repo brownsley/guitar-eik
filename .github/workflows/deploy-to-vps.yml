@@ -26,16 +26,13 @@ jobs:
       - name: List all files to find the JAR
         run: ls -R
 
-      - name: List files for debug
-        run: ls -la target/
-
       - name: Upload JAR to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.HOST}}
           username: ${{ secrets.USER}}
           password: ${{ secrets.PASSWORD}}
-          source: "target/server-4.0.5.jar"
+          source: "server-4.0.5.jar"
           target: "/root/guitar-eik/deploy"
           strip_components: 1
 
