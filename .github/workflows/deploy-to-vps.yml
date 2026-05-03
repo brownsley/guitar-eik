@@ -17,7 +17,12 @@ jobs:
     needs: call-build
     runs-on: ubuntu-latest
     steps:
-
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: guitar-eik-app
+          path: target/*.jar
+      
       - name: Upload JAR to VPS via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
