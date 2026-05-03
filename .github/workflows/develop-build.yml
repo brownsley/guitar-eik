@@ -25,7 +25,11 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
-        run: mvn clean package --file pom.xml
+        run: |
+          mvn clean package --file pom.xml \
+          -Dspring.datasource.url=$DB_URL \
+          -Dspring.datasource.username=$DB_USER \
+          -Dspring.datasource.password=$DB_PASSWORD
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
