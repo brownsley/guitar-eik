@@ -43,12 +43,23 @@ jobs:
           username: ${{ secrets.USER}}
           password: ${{ secrets.PASSWORD}}
           script: |
-            mkdir -p /root/guitar-eik/deploy
             cd /root/guitar-eik/deploy
-            fuser -k 9090/tcp || true
+
+            PID=$(lsof -t -i:9090)
+            if [ ! -z "$PID" ]; then
+              kill -9 $PID
+              echo "Process killed."
+            fi
+
+            echo "Waiting for port 9090 to be free..."
+            while lsof -Pi :9090 -sTCP:LISTEN -t >/dev/null ; do
+                sleep 1
+            done
+            echo "Port 9090 is free."
 
             export DB_URL="${{ secrets.DB_URL }}"
             export DB_USER="${{ secrets.DB_USER }}"
             export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
 
             nohup java -jar server-4.0.5.jar > app.log 2>&1 &
+            echo "App started successfully."
