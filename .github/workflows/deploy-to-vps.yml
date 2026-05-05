@@ -1,4 +1,4 @@
-name: Java with Maven
+name: Publish
 
 on:
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
           host: ${{ secrets.HOST}}
           username: ${{ secrets.USER}}
           password: ${{ secrets.PASSWORD}}
-          source: "server-4.0.5.jar"
+          source: "target/*.jar"
           target: "/root/guitar-eik/deploy"
           strip_components: 1
 
@@ -47,8 +47,10 @@ jobs:
             cd /root/guitar-eik/deploy
             fuser -k 9090/tcp || true
 
+            mv *.jar app.jar
+
             export DB_URL="${{ secrets.DB_URL }}"
             export DB_USER="${{ secrets.DB_USER }}"
             export DB_PASSWORD="${{ secrets.DB_PASSWORD }}"
 
-            nohup java -jar server-4.0.5.jar > app.log 2>&1 &
+            nohup java -jar app.jar > app.log 2>&1 &
