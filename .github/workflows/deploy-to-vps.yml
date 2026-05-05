@@ -34,7 +34,10 @@ jobs:
           password: ${{ secrets.PASSWORD}}
           source: "server-4.0.5.jar"
           target: "/root/guitar-eik/deploy"
-          strip_components: 1
+          overwrite: true
+
+      - name: Debug File Size
+        run: ls -lh server-4.0.5.jar
 
       - name: Restart Spring Boot App on VPS
         uses: appleboy/ssh-action@v1.0.3
