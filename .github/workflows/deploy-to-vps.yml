@@ -47,7 +47,7 @@ jobs:
             cd /root/guitar-eik/deploy
             fuser -k 9090/tcp || true
 
-            mv *.jar app.jar
+            mv server-4.0.5.jar app.jar
 
             export DB_URL="${{ secrets.DB_URL }}"
             export DB_USER="${{ secrets.DB_USER }}"
