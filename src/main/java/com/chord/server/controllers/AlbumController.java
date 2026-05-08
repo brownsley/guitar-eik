@@ -17,7 +17,7 @@ import com.chord.server.projections.AlbumSummary;
 import com.chord.server.services.AlbumService;
 
 @RestController
-@RequestMapping("/albums    ")
+@RequestMapping("/albums")
 public class AlbumController {
     private final AlbumService albumService;
 
