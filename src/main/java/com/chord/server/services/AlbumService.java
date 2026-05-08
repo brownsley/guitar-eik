@@ -2,6 +2,9 @@ package com.chord.server.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.chord.server.dto.request.AlbumCreateDto;
@@ -9,7 +12,7 @@ import com.chord.server.entities.Album;
 import com.chord.server.entities.Artist;
 import com.chord.server.entities.Song;
 import com.chord.server.exception.ResourceAlreadyExistsException;
-import com.chord.server.exception.ResourceNotFoundException;
+import com.chord.server.projections.AlbumDetailSummary;
 import com.chord.server.projections.AlbumSummary;
 import com.chord.server.repositories.AlbumRepository;
 import com.chord.server.repositories.ArtistRepository;
@@ -28,12 +31,17 @@ public class AlbumService {
         this.songRepository = songRepository;
     }
 
-    public List<AlbumSummary> getAllAlbumSummaries() {
-        return this.albumRepository.findAllProjectedBy();
+    public Page<AlbumSummary> getAllAlbumSummaries(int page, int size) {
+        PageRequest pageable = PageRequest.of(page, size, Sort.by("id").descending());
+        return this.albumRepository.findBy(pageable);
     }
 
-    public Album getAlbumById(long id) {
-        return this.albumRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Album Not Found"));
+    public List<AlbumSummary> searchAlbums(String query) {
+        return this.albumRepository.findByNameContainingIgnoreCase(query);
+    }
+
+    public AlbumDetailSummary getAlbumById(long id) {
+        return this.albumRepository.findProjectedById(id);
     }
 
     public void createAlbum(AlbumCreateDto createDto) {

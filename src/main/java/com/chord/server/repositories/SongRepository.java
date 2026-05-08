@@ -11,8 +11,6 @@ import com.chord.server.projections.SongSummary;
 
 public interface SongRepository extends JpaRepository<Song, Long> {
 
-    List<SongSummary> findAllProjectedBy();
-
     boolean existsByTitle(String title);
 
     Page<SongSummary> findBy(Pageable pageable);
