@@ -32,7 +32,7 @@ public class ArtistService {
         if (artistRepository.existsByName(createDto.getName())) {
             throw new ResourceAlreadyExistsException(createDto.getName() + " already exists");
         }
-        artist.setAvater(createDto.getAvater());
+        artist.setAvatar(createDto.getAvater());
         artist.setName(createDto.getName());
         artist.setSocialLink(createDto.getSocialLink());
         artistRepository.save(artist);
