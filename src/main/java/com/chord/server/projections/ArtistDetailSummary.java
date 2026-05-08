@@ -14,7 +14,17 @@ public interface ArtistDetailSummary {
     @Value("#{target.songs.size()}")
     Integer getTotalTrack();
 
+    List<AlbumShortInfo> getAlbums();
+
     List<SongShortInfo> getSongs();
+
+    public interface AlbumShortInfo {
+        Long getId();
+
+        String getName();
+
+        String getCover();
+    }
 
     public interface SongShortInfo {
         Long getId();
