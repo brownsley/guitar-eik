@@ -1,9 +1,11 @@
 package com.chord.server.entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,12 +14,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.ToString;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "artists")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Artist {
 
     @Id
@@ -33,7 +40,10 @@ public class Artist {
     private String socialLink;
 
     @ManyToMany(mappedBy = "artists")
-    @ToString.Exclude
-    @JsonIgnoreProperties("artists")
+    @JsonIgnore
+    private Set<Album> albums = new HashSet<>();
+
+    @ManyToMany(mappedBy = "artists")
+    @JsonIgnore
     private List<Song> songs = new ArrayList<>();
 }
