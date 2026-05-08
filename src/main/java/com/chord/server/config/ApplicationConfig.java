@@ -52,7 +52,7 @@ public class ApplicationConfig {
                 .formLogin(login -> login.disable())
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/songs/**").permitAll()
-                        .requestMatchers("/album/**").permitAll()
+                        .requestMatchers("/albums/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/artists/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/health").permitAll()
                         .requestMatchers("/RPA/**").permitAll()
