@@ -10,5 +10,7 @@ public class SongCreateDto {
 
     private String lyric;
 
+    private Long albumId;
+
     private List<Long> artists;
 }
