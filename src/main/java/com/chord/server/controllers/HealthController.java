@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthController {
     @GetMapping("/health")
     public Map<String, String> healthCheck() {
-        return Map.of("status", "API V1 ", "message", "This is Deploy by github action");
+        return Map.of("status", "API V1.2 ", "message", "Album Search Add !");
     }
 }

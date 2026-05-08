@@ -12,8 +12,6 @@ import com.chord.server.projections.ArtistSummary;
 
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
 
-    List<ArtistSummary> findAllProjectedBy();
-
     Page<ArtistSummary> findBy(Pageable pageable);
 
     boolean existsByName(String name);

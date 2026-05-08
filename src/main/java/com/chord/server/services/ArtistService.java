@@ -23,7 +23,7 @@ public class ArtistService {
         this.artistRepository = artistRepository;
     }
 
-    public List<ArtistSummary> searchArtist(String query) {
+    public List<ArtistSummary> searchArtists(String query) {
         return artistRepository.findByNameContainingIgnoreCase(query);
     }
 

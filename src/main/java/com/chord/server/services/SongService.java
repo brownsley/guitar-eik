@@ -9,23 +9,28 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.chord.server.dto.request.SongCreateDto;
+import com.chord.server.entities.Album;
 import com.chord.server.entities.Artist;
 import com.chord.server.entities.Song;
 import com.chord.server.exception.ResourceAlreadyExistsException;
 import com.chord.server.exception.ResourceNotFoundException;
 import com.chord.server.projections.SongSummary;
+import com.chord.server.repositories.AlbumRepository;
 import com.chord.server.repositories.ArtistRepository;
 import com.chord.server.repositories.SongRepository;
 
 @Service
 public class SongService {
 
+    private final AlbumRepository albumRepository;
     private final ArtistRepository artistRepository;
     private final SongRepository songRepository;
 
-    public SongService(SongRepository songRepository, ArtistRepository artistRepository) {
+    public SongService(SongRepository songRepository, ArtistRepository artistRepository,
+            AlbumRepository albumRepository) {
         this.songRepository = songRepository;
         this.artistRepository = artistRepository;
+        this.albumRepository = albumRepository;
     }
 
     public List<SongSummary> searchSongs(String query) {
@@ -36,6 +41,11 @@ public class SongService {
         Song song = new Song();
         if (songRepository.existsByTitle(createDto.getTitle())) {
             throw new ResourceAlreadyExistsException(createDto.getTitle() + "already exists");
+        }
+        if (createDto.getAlbumId() != null) {
+            Album album = albumRepository.findById(createDto.getAlbumId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Album Not Found"));
+            song.setAlbum(album);
         }
         song.setTitle(createDto.getTitle());
         song.setLyric(createDto.getLyric());
