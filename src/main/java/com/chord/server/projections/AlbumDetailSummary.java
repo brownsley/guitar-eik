@@ -20,11 +20,7 @@ public interface AlbumDetailSummary {
 
         Long getTotalView();
 
-        List<ArtistNameOnly> getArtists();
-
-        interface ArtistNameOnly {
-            String getName();
-        }
+        List<ArtistSummary> getArtists();
 
     }
 
