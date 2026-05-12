@@ -11,4 +11,7 @@ public interface AlbumSummary {
 
     @Value("#{target.cover}")
     String getCover();
+
+    @Value("#{target.songs.size()}")
+    Integer getTotalSongs();
 }
