@@ -53,6 +53,7 @@ public class ApplicationConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/songs/**").permitAll()
                         .requestMatchers("/albums/**").permitAll()
+                        .requestMatchers("/report/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/artists/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/health").permitAll()
                         .requestMatchers("/RPA/**").permitAll()
