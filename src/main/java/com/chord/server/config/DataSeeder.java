@@ -37,9 +37,6 @@ public class DataSeeder implements CommandLineRunner {
 
         Faker faker = new Faker();
 
-        // =========================
-        // 1. ARTISTS (45)
-        // =========================
         List<Artist> artists = new ArrayList<>();
 
         for (int i = 0; i < 30; i++) {
@@ -55,9 +52,6 @@ public class DataSeeder implements CommandLineRunner {
 
         artistRepository.saveAll(artists);
 
-        // =========================
-        // 2. ALBUMS (30)
-        // =========================
         List<Album> albums = new ArrayList<>();
 
         for (int i = 0; i < 25; i++) {
@@ -77,10 +71,6 @@ public class DataSeeder implements CommandLineRunner {
         }
 
         albumRepository.saveAll(albums);
-
-        // =========================
-        // 3. SONGS
-        // =========================
         final String lyric = "[V]\n" + //
                 "[C]အေးစက်နေတဲ့ငါ့ရင်ဘက်ထဲကို မင်း[Am]အလင်းတွေပက်ဖြန်းပြီး\n" +
                 "[F]သက်တန့်တစ်ခုလိုဖြစ်စေခဲ့တာ [C]ကျေးဇူးတင်တ[G]ယ်\n" + //

@@ -1,17 +1,13 @@
 package com.chord.server.dto.response;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 public class ErrorDetails {
     private String message;
     private String details;
     private LocalDateTime timestamp;
-
-    public ErrorDetails(String message, String detail) {
-        this.message = message;
-        this.details = detail;
-        this.timestamp = LocalDateTime.now();
-    }
+    private Map<String, String> errors;
 
     public String getMessage() {
         return message;
@@ -35,6 +31,27 @@ public class ErrorDetails {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Map<String, String> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(Map<String, String> errors) {
+        this.errors = errors;
+    }
+
+    public ErrorDetails(String message, String detail) {
+        this.message = message;
+        this.details = detail;
+        this.timestamp = LocalDateTime.now();
+    }
+
+    public ErrorDetails(String message, String detail, Map<String, String> error) {
+        this.message = message;
+        this.details = detail;
+        this.errors = error;
+        this.timestamp = LocalDateTime.now();
     }
 
 }

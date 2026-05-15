@@ -1,12 +1,13 @@
 package com.chord.server.exception;
 
-import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.validation.method.MethodValidationException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -22,14 +23,25 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "You do not have permission to access this resource");
-        body.put("details", request.getDescription(false));
+    @ExceptionHandler(MethodValidationException.class)
+    public ResponseEntity<ErrorDetails> handleValidationException(MethodArgumentNotValidException ex,
+            WebRequest request) {
+        Map<String, String> validationErrors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(e -> validationErrors.put(e.getField(), e.getDefaultMessage()));
 
-        return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
+        ErrorDetails errorDetails = new ErrorDetails("Validation Failed",
+                request.getDescription(false),
+                validationErrors);
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorDetails> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
+        ErrorDetails errorDetails = new ErrorDetails(
+                "Access Denied: You do not have permission to access this resource",
+                request.getDescription(false));
+
+        return new ResponseEntity<>(errorDetails, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
