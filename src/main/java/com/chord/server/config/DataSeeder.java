@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.chord.server.entities.Album;
-import com.chord.server.entities.Artist;
-import com.chord.server.entities.Song;
-import com.chord.server.repositories.AlbumRepository;
-import com.chord.server.repositories.ArtistRepository;
-import com.chord.server.repositories.SongRepository;
+import com.chord.server.entities.music.Album;
+import com.chord.server.entities.music.Artist;
+import com.chord.server.entities.music.Song;
+import com.chord.server.repositories.music.AlbumRepository;
+import com.chord.server.repositories.music.ArtistRepository;
+import com.chord.server.repositories.music.SongRepository;
 
 import jakarta.transaction.Transactional;
 import net.datafaker.Faker;

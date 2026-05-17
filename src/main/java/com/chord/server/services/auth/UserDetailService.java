@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.chord.server.entities.auth.User;
 import com.chord.server.exception.ResourceNotFoundException;
-import com.chord.server.repositories.UserRepository;
+import com.chord.server.repositories.auth.UserRepository;
 
 @Service
 public class UserDetailService implements UserDetailsService {

@@ -13,7 +13,9 @@ import com.chord.server.dto.request.role.PermissionCreateDto;
 import com.chord.server.dto.request.role.RoleCreateDto;
 import com.chord.server.entities.auth.Permission;
 import com.chord.server.entities.auth.Role;
-import com.chord.server.services.RolePermissionService;
+import com.chord.server.services.auth.RolePermissionService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/RPA")
@@ -35,17 +37,17 @@ public class RolePermissionController {
     }
 
     @PostMapping("/assign")
-    public void assignRoleToUser(@RequestBody AssignRoleDto assignRoleDto) {
+    public void assignRoleToUser(@Valid @RequestBody AssignRoleDto assignRoleDto) {
         rolePermissionService.assignRoleToUser(assignRoleDto);
     }
 
     @PostMapping("/role")
-    public void roleCreate(@RequestBody RoleCreateDto createDto) {
+    public void roleCreate(@Valid @RequestBody RoleCreateDto createDto) {
         rolePermissionService.roleCreate(createDto);
     }
 
     @PostMapping("permission")
-    public void permissionCreate(@RequestBody PermissionCreateDto createDto) {
+    public void permissionCreate(@Valid @RequestBody PermissionCreateDto createDto) {
         rolePermissionService.permissionCreate(createDto);
     }
 }

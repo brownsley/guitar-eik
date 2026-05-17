@@ -9,6 +9,8 @@ import com.chord.server.dto.request.auth.UserCreateDto;
 import com.chord.server.dto.request.auth.UserLoginDto;
 import com.chord.server.services.auth.AuthService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -20,12 +22,12 @@ public class AuthController {
 
     @PostMapping("/register")
     // @PreAuthorize("hasAuthority('user:create')")
-    public String register(@RequestBody UserCreateDto createDto) {
+    public String register(@Valid @RequestBody UserCreateDto createDto) {
         return authService.register(createDto);
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserLoginDto loginDto) {
+    public String login(@Valid @RequestBody UserLoginDto loginDto) {
         return authService.login(loginDto);
     }
 
