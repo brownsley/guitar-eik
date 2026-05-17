@@ -54,6 +54,8 @@ public class ApplicationConfig {
                         .requestMatchers(HttpMethod.GET, "/songs/**").permitAll()
                         .requestMatchers("/albums/**").permitAll()
                         .requestMatchers("/report/**").permitAll()
+                        .requestMatchers("/songrequest/**").permitAll()
+                        .requestMatchers("/suggestion/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/artists/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/health").permitAll()
                         .requestMatchers("/RPA/**").permitAll()

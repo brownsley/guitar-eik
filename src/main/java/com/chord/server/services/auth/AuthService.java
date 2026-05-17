@@ -10,7 +10,7 @@ import com.chord.server.dto.request.auth.UserLoginDto;
 import com.chord.server.entities.auth.User;
 import com.chord.server.exception.ResourceAlreadyExistsException;
 import com.chord.server.exception.ResourceNotFoundException;
-import com.chord.server.repositories.UserRepository;
+import com.chord.server.repositories.auth.UserRepository;
 
 import jakarta.transaction.Transactional;
 
