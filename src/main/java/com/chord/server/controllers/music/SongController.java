@@ -28,7 +28,7 @@ public class SongController {
     }
 
     @PostMapping
-    public void spngCreate(@Valid @RequestBody SongCreateDto createDto) {
+    public void songCreate(@Valid @RequestBody SongCreateDto createDto) {
         songService.songCreate(createDto);
     }
 
