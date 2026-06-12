@@ -4,7 +4,6 @@ package com.chord.server.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -21,12 +20,15 @@ import net.datafaker.Faker;
 @Component
 public class DataSeeder implements CommandLineRunner {
 
-    @Autowired
-    private ArtistRepository artistRepository;
-    @Autowired
-    private AlbumRepository albumRepository;
-    @Autowired
-    private SongRepository songRepository;
+    private final ArtistRepository artistRepository;
+    private final AlbumRepository albumRepository;
+    private final SongRepository songRepository;
+
+    DataSeeder(ArtistRepository artistRepository, AlbumRepository albumRepository, SongRepository songRepository) {
+        this.artistRepository = artistRepository;
+        this.albumRepository = albumRepository;
+        this.songRepository = songRepository;
+    }
 
     @Override
     @Transactional
@@ -44,7 +46,8 @@ public class DataSeeder implements CommandLineRunner {
             artist.setName(faker.music().genre() + " " + faker.name().fullName());
 
             long randomId = faker.number().numberBetween(1000000L, 100000000L);
-            artist.setAvatar("https://robohash.org/" + randomId + "?size=500x500");
+            artist.setAvatar(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx3gVDCjsgLaDv5W4bOPbCrMeOJMM119hmOz835_w1zM0ZDLt4K3GtR8_c&s=10");
             artist.setSocialLink("https://instagram.com/" + faker.internet().username());
 
             artists.add(artist);
@@ -57,7 +60,9 @@ public class DataSeeder implements CommandLineRunner {
         for (int i = 0; i < 25; i++) {
             Album album = new Album();
             album.setName(faker.music().chord() + " " + faker.commerce().productName());
-            album.setCover("https://robohash.org/" + faker.random().nextInt() + "/300/300");
+            album.setCover(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR30k1JtxHnqwyYeHjlfTrR7RKyCnPOcroYS8BllXUGTn-MBf5JE36c88k&s=10"
+                            + faker.random().nextInt() + "/300/300");
 
             int artistCount = faker.number().numberBetween(1, 4);
             for (int j = 0; j < artistCount; j++) {
