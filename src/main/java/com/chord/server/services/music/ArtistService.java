@@ -35,7 +35,7 @@ public class ArtistService {
         if (artistRepository.existsByName(createDto.getName())) {
             throw new ResourceAlreadyExistsException(createDto.getName() + " already exists");
         }
-        String avatarFileName = imageStorageService.imageUpload(file);
+        String avatarFileName = imageStorageService.imageUpload(file, "artist");
 
         Artist artist = new Artist();
         artist.setAvatar(avatarFileName);
