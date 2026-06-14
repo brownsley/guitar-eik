@@ -23,12 +23,12 @@ public class ImageStorageSuperBase implements ImageStorageService {
     }
 
     @Override
-    public String imageUpload(MultipartFile file) {
+    public String imageUpload(MultipartFile file, String folderName) {
         try {
             byte[] data = file.getBytes();
 
             ImmutableImage image = ImmutableImage.loader().fromBytes(data);
-            ImmutableImage resizedImage = image.scaleTo(500, 500);
+            ImmutableImage resizedImage = image.cover(500, 500);
 
             byte[] optimizedData = resizedImage.bytes(WebpWriter.DEFAULT
                     .withQ(80));
@@ -38,7 +38,7 @@ public class ImageStorageSuperBase implements ImageStorageService {
             char[] alphabet = alphabetString.toCharArray();
 
             String fileName = NanoIdUtils.randomNanoId(new Random(), alphabet, size);
-            String targetPath = fileName + ".webp";
+            String targetPath = folderName + "/" + fileName + ".webp";
 
             PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                     .bucket("hee")
@@ -47,7 +47,7 @@ public class ImageStorageSuperBase implements ImageStorageService {
                     .build();
 
             s3Client.putObject(putObjectRequest, RequestBody.fromBytes(optimizedData));
-            return fileName;
+            return fileName + ".webp";
         } catch (Exception e) {
             return "Upload Failed: " + e.getMessage();
         }

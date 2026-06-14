@@ -5,5 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public interface ImageStorageService {
-    String imageUpload(MultipartFile file);
+    String imageUpload(MultipartFile file, String folderName);
 }
