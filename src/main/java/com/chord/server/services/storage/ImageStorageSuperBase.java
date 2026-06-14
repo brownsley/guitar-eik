@@ -28,7 +28,7 @@ public class ImageStorageSuperBase implements ImageStorageService {
             byte[] data = file.getBytes();
 
             ImmutableImage image = ImmutableImage.loader().fromBytes(data);
-            ImmutableImage resizedImage = image.scaleTo(500, 500);
+            ImmutableImage resizedImage = image.cover(500, 500);
 
             byte[] optimizedData = resizedImage.bytes(WebpWriter.DEFAULT
                     .withQ(80));
