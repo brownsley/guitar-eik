@@ -13,9 +13,6 @@ public class ArtistCreateDto {
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
 
-    @NotBlank(message = "Avatar is required")
-    private String avater;
-
     @URL(message = "Please provide a valid social media link")
     private String socialLink;
 }

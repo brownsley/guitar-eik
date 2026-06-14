@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.chord.server.dto.request.music.ArtistCreateDto;
 import com.chord.server.entities.music.Artist;
@@ -14,25 +15,30 @@ import com.chord.server.exception.ResourceAlreadyExistsException;
 import com.chord.server.projections.ArtistDetailSummary;
 import com.chord.server.projections.ArtistSummary;
 import com.chord.server.repositories.music.ArtistRepository;
+import com.chord.server.services.storage.ImageStorageService;
 
 @Service
 public class ArtistService {
+    private final ImageStorageService imageStorageService;
     private final ArtistRepository artistRepository;
 
-    public ArtistService(ArtistRepository artistRepository) {
+    public ArtistService(ArtistRepository artistRepository, ImageStorageService imageStorageService) {
         this.artistRepository = artistRepository;
+        this.imageStorageService = imageStorageService;
     }
 
     public List<ArtistSummary> searchArtists(String query) {
         return artistRepository.findByNameContainingIgnoreCase(query);
     }
 
-    public void artistCreate(ArtistCreateDto createDto) {
-        Artist artist = new Artist();
+    public void artistCreate(ArtistCreateDto createDto, MultipartFile file) {
         if (artistRepository.existsByName(createDto.getName())) {
             throw new ResourceAlreadyExistsException(createDto.getName() + " already exists");
         }
-        artist.setAvatar(createDto.getAvater());
+        String avatarFileName = imageStorageService.imageUpload(file);
+
+        Artist artist = new Artist();
+        artist.setAvatar(avatarFileName);
         artist.setName(createDto.getName());
         artist.setSocialLink(createDto.getSocialLink());
         artistRepository.save(artist);
