@@ -17,3 +17,11 @@ spring:
 
 server:
     port: 9090
+
+aws:
+    s3:
+        endpoint: ${AWS_S3_ENDPOINT:https://tlkyqfrgpdrwkbvjicsl.storage.supabase.co/storage/v1/s3}
+        region: ${AWS_S3_REGION:ap-northeast-2}
+        access-key: ${AWS_S3_ACCESS_KEY:66173905af68d9eeff4379063fd0e3f7}
+        secret-key: ${AWS_S3_SECRET_KEY:d82ba50da78bba0b3791f1232f5d2f017ff9e03e020759590885a81ef6b28045}
+        bucket-name: ${AWS_S3_BUCKET_NAME:hee}
