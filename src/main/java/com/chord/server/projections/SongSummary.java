@@ -7,6 +7,8 @@ public interface SongSummary {
 
     String getTitle();
 
+    String getCover();
+
     Long getTotalView();
 
     List<ArtistSummary> getArtists();

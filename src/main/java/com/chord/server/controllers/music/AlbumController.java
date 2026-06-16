@@ -3,13 +3,16 @@ package com.chord.server.controllers.music;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.chord.server.dto.request.music.AlbumCreateDto;
 import com.chord.server.projections.AlbumDetailSummary;
@@ -44,9 +47,10 @@ public class AlbumController {
         return albumService.getAlbumById(id);
     }
 
-    @PostMapping
-    public void createAlbum(@Valid @RequestBody AlbumCreateDto createDto) {
-        albumService.createAlbum(createDto);
+    @PostMapping(consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public void createAlbum(@Valid @ModelAttribute AlbumCreateDto createDto,
+            @RequestPart(value = "file", required = false) MultipartFile file) {
+        albumService.createAlbum(createDto, file);
     }
 
 }

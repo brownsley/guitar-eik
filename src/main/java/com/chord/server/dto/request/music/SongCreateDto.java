@@ -4,7 +4,6 @@ import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -19,7 +18,6 @@ public class SongCreateDto {
     @Size(max = 10000, message = "Lyric is too long")
     private String lyric;
 
-    @NotNull(message = "Album ID is required")
     private Long albumId;
 
     @NotEmpty(message = "At least one artist must be selected")
