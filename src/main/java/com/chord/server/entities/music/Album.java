@@ -35,6 +35,7 @@ public class Album {
     private String cover;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("albums")
     @JoinTable(name = "album_songs", joinColumns = @JoinColumn(name = "album_id"), inverseJoinColumns = @JoinColumn(name = "song_id"))
     private List<Song> songs = new ArrayList<>();
 

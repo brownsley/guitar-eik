@@ -23,6 +23,8 @@ public interface AlbumDetailSummary {
 
         String getTitle();
 
+        String getCover();
+
         Long getTotalView();
 
         List<ArtistSummary> getArtists();

@@ -31,6 +31,8 @@ public interface ArtistDetailSummary {
 
         String getTitle();
 
+        String getCover();
+
         Long getTotalView();
     }
 }
