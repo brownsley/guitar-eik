@@ -13,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,15 +33,17 @@ public class Song {
     @Column(nullable = false)
     private String title;
 
+    @Column(nullable = true)
+    private String cover;
+
     @Column(columnDefinition = "TEXT")
     private String lyric;
 
     private Long totalView = 0L;
 
-    @ManyToOne
-    @JoinColumn(name = "album_id")
-    @JsonIgnoreProperties({ "songs" })
-    private Album album;
+    @ManyToMany(mappedBy = "songs")
+    @JsonIgnoreProperties("songs")
+    private List<Album> albums = new ArrayList<>();
 
     @ManyToMany
     @JsonIgnoreProperties("songs")
